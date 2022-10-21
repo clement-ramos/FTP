@@ -5,7 +5,7 @@ echo "Option '2' Uninstall FTP"
 echo "Option '3' Quit script"
 
 echo "Choose an option : " | tr -d '\n';
-read $option 
+read option 
 
 case $option in
     "1")
@@ -16,11 +16,17 @@ case $option in
     cp /etc/proftpd/tls.conf /etc/proftpd/tls_backup.conf
     cp /etc/proftpd/modules.conf /etc/proftpd/modules_backup.conf
 
-    git clone /etc/proftpd/ https://github.com/clement-ramos/git-config.git
+    cp /etc/proftpd/proftpd.conf   
+    cp /etc/proftpd/tls.conf   
+    cp /etc/proftpd/modules.conf 
 
-    cp /etc/proftpd/git-config/git_proftpd.conf /etc/proftpd/proftpd.conf
-    cp /etc/proftpd/git-config/git_tls.conf /etc/proftpd/tls.conf
-    cp /etc/proftpd/git-config/git_modules.conf /etc/proftpd/modules.conf
+    cd /home
+    git clone https://github.com/clement-ramos/git-config.git
+    cd
+    
+    cp /home/git-config/git_proftpd.conf /etc/proftpd/proftpd.conf
+    cp /home/git-config/git_tls.conf /etc/proftpd/tls.conf
+    cp /home/git-config/git_modules.conf /etc/proftpd/modules.conf
 
     mkdir /etc/proftpd/ssl
 
@@ -46,8 +52,7 @@ case $option in
     exit
     ;;
 
-    "*")
-    echo "Error : avaiable option are 1, 2 or 3"
+    *)
+    echo "Error : available option are 1, 2 or 3"
     ;;
 
-###########################################
