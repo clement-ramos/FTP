@@ -17,9 +17,8 @@ UserPasswd="$d$d"
 if [ "$a" != "Id" ];
 	then
 		#adduser anyway and set their passwords
-		sudo useradd -m -d /home "$UserNameNoSpace"
-                echo "$UserNameNoSpace":"$UserPasswd" | sudo chpasswd
-		sudo adduser $UserNameNoSpace ftpUsers
+		echo -ne "$UserPasswd\n$UserPasswd" | adduser --fore-badname "$UserNameNoSpace" && echo -ne "\n"
+		adduser "$UserNameNoSpace" ftpUsers
 
 		#Test if their a sudo and attribute it if its true
 		if [[ "$e" = *"Admin"* ]];
