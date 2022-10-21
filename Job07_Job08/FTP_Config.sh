@@ -12,29 +12,21 @@ case $option in
     su-
     apt-get install -y proftpd-* ;apt-get install -y git; apt-get update -y ; apt-get upgrade -y; 
 
-    cp /etc/proftpd/proftpd.conf /etc/proftpd/proftpd_backup.conf
-    cp /etc/proftpd/tls.conf /etc/proftpd/tls_backup.conf
-    cp /etc/proftpd/modules.conf /etc/proftpd/modules_backup.conf
-
-    rm /etc/proftpd/proftpd.conf   
-    rm /etc/proftpd/tls.conf   
-    rm /etc/proftpd/modules.conf 
-
-    cd /home
+    mv /etc/proftpd/proftpd.conf /etc/proftpd/proftpd_backup.conf
+    mv /etc/proftpd/tls.conf /etc/proftpd/tls_backup.conf
+    mv /etc/proftpd/modules.conf /etc/proftpd/modules_backup.conf
+        
     git clone https://github.com/clement-ramos/git-config-ftp.git
-    cd
-    
-    cp /home/git-config-ftp/git_proftpd.conf /etc/proftpd/proftpd.conf
-    cp /home/git-config-ftp/git_tls.conf /etc/proftpd/tls.conf
-    cp /home/git-config_ftp/git_modules.conf /etc/proftpd/modules.conf
+   
+    mv FTP/ftp-config/ftp-config-proftpd.conf /etc/proftpd/proftpd.conf
+    mv FTP/ftp-config/ftp-config-tls.conf /etc/proftpd/tls.conf
+    mv FTP/ftp-config/ftp-config-modules.conf /etc/proftpd/modules.conf
 
     mkdir /etc/proftpd/ssl
 
-    openssl req -x509 -nodes -days 365 -newkey rsa:4096 -out /etc/proftpd/ssl/proftpd-rsa.pem -keyout /etc/proftpd/ssl/proftpd-key.pem
+    echo -ne "\n\n\n\n\n\n\n" | openssl req -x509 -nodes -days 365 -newkey rsa:4096 -out /etc/proftpd/ssl/proftpd-rsa.pem -keyout /etc/proftpd/ssl/proftpd-key.pem
 
     chmod 0600 /etc/proftpd/ssl/proftpd-key.pem
-
-    rm -r /home/git-config-ftp
 
     service proftpd restart
 
