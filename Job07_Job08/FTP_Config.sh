@@ -56,3 +56,4 @@ case $option in
     echo "Error : available option are 1, 2 or 3"
     ;;
 
+esac
