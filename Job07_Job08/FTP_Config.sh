@@ -16,17 +16,17 @@ case $option in
     cp /etc/proftpd/tls.conf /etc/proftpd/tls_backup.conf
     cp /etc/proftpd/modules.conf /etc/proftpd/modules_backup.conf
 
-    cp /etc/proftpd/proftpd.conf   
-    cp /etc/proftpd/tls.conf   
-    cp /etc/proftpd/modules.conf 
+    rm /etc/proftpd/proftpd.conf   
+    rm /etc/proftpd/tls.conf   
+    rm /etc/proftpd/modules.conf 
 
     cd /home
-    git clone https://github.com/clement-ramos/git-config.git
+    git clone https://github.com/clement-ramos/git-config-ftp.git
     cd
     
-    cp /home/git-config/git_proftpd.conf /etc/proftpd/proftpd.conf
-    cp /home/git-config/git_tls.conf /etc/proftpd/tls.conf
-    cp /home/git-config/git_modules.conf /etc/proftpd/modules.conf
+    cp /home/git-config-ftp/git_proftpd.conf /etc/proftpd/proftpd.conf
+    cp /home/git-config-ftp/git_tls.conf /etc/proftpd/tls.conf
+    cp /home/git-config_ftp/git_modules.conf /etc/proftpd/modules.conf
 
     mkdir /etc/proftpd/ssl
 
@@ -34,7 +34,7 @@ case $option in
 
     chmod 0600 /etc/proftpd/ssl/proftpd-key.pem
 
-    rm -r git-config
+    rm -r /home/git-config-ftp
 
     service proftpd restart
 
